@@ -1,7 +1,7 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #282c34;
-    color: white;
+    background-color: #f0f0f0;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,19 +10,19 @@ body {
 }
 
 .game-container {
-    background-color: #1c1f26;
+    background-color: #ffffff;
     border-radius: 15px;
     padding: 20px;
     width: 90%;
-    max-width: 1200px;
+    max-width: 800px;
     text-align: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     font-size: 32px;
     margin-bottom: 20px;
-    color: #61dafb;
+    color: #007bff;
 }
 
 .content-wrapper {
@@ -32,6 +32,130 @@ h1 {
 
 .game-section {
     flex: 1;
+}
+.key-section {
+    margin-top: 20px;
+    text-align: left;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.key-section h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.key-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.key-section li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.key-section img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+#score-counter {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sequence {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 15px;
+}
+
+.dna-base {
+    font-size: 24px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+}
+
+.base {
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    transition: transform 0.2s;
+}
+
+.base img {
+    width: 40px;
+    height: 40px;
+}
+
+.base:hover {
+    transform: scale(1.1);
+}
+
+.bases {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.dropzone {
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #007bff;
+}
+
+.mrna-base {
+    width: 60px;
+    height: 60px;
+    background-color: #28a745;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedback {
+    margin-top: 20px;
+    font-size: 18px;
+    min-height: 20px;
+}
+
+.reset-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #0056b3;
 }
 
 .explanation-section {
