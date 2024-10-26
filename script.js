@@ -6,19 +6,89 @@ const rnaPairs = {
     G: 'C'
 };
 
-const codons = ['AUG', 'GCU', 'CCG', 'GGG']; // Codons for Stage 3
-const tRNAs = {
-    'UAC': 'Methionine', // Anticodon for AUG codon (Met)
-    'CGA': 'Alanine',    // Anticodon for GCU codon (Ala)
-    'GGC': 'Proline',    // Anticodon for CCG codon (Pro)
-    'CCC': 'Glycine'     // Anticodon for GGG codon (Gly)
+let dnaSequence = generateRandomSequence(5);
+let mrnaSequence = [];
+let score = 0;
+let currentIndex = 0;
+
 };
 
 const dnaTemplateElement = document.getElementById('dna-template');
 const mrnaSequenceElement = document.getElementById('mrna-sequence');
 const stage1Feedback = document.getElementById('stage1-feedback');
-const dropzone = document.getElementById('dropzone');
-const nextStage1Button = document.getElementById('nextStage1');
+const dropzone = document.getElementById('score-counter');
+const resetGameButton = document.getElementById('resetGame');
+
+function generateRandomSequence(length) {
+    let sequence = [];
+    for (let i = 0; i < length; i++) {
+        const randomBase = dnaBases[Math.floor(Math.random() * dnaBases.length)];
+        sequence.push(randomBase);
+    }
+    return sequence;
+}
+
+function initializeStage1() {
+    dnaTemplateElement.innerHTML = ''; // Clear previous content
+    mrnaSequenceElement.innerHTML = ''; // Clear previous content
+    mrnaSequence = [];
+    currentIndex = 0;
+    score = 0;
+    scoreCounter.textContent = `Score: ${score}`;
+    dnaSequence = generateRandomSequence(5);
+
+    dnaSequence.forEach(base => {
+        const dnaBaseElement = document.createElement('div');
+        dnaBaseElement.classList.add('dna-base');
+        dnaBaseElement.textContent = base;
+        dnaTemplateElement.appendChild(dnaBaseElement);
+
+        const mrnaDropzone = document.createElement('div');
+        mrnaDropzone.classList.add('dropzone');
+        mrnaDropzone.dataset.correctBase = rnaPairs[base];
+        mrnaDropzone.addEventListener('dragover', dragOver);
+        mrnaDropzone.addEventListener('drop', drop);
+        mrnaSequenceElement.appendChild(mrnaDropzone);
+    });
+
+    updateExplanation("Welcome to the Base Pair Matching Game! Pair the mRNA bases with the DNA template. Remember, Adenine (A) pairs with Uracil (U) in RNA, and Cytosine (C) pairs with Guanine (G).");
+}
+
+document.querySelectorAll('.base').forEach(base => {
+    base.addEventListener('dragstart', dragStart);
+});
+
+resetGameButton.addEventListener('click', initializeStage1);
+
+function dragStart(event) {
+    event.dataTransfer.setData('text', event.target.dataset.base);
+}
+
+function dragOver(event) {
+    event.preventDefault();
+}
+
+function drop(event) {
+    event.preventDefault();
+    const droppedBase = event.dataTransfer.getData('text');
+    const correctBase = event.target.dataset.correctBase;
+
+    if (droppedBase === correctBase) {
+        event.target.textContent = droppedBase;
+        score++;
+        scoreCounter.textContent = `Score: ${score}`;
+        stage1Feedback.textContent = 'Correct! Bond formed.';
+        stage1Feedback.style.color = '#28a745';
+
+        if (score === dnaSequence.length) {
+            stage1Feedback.textContent = 'All pairs matched! Great job!';
+            updateExplanation("Great job! You've completed the matching game.");
+        }
+    } else {
+        stage1Feedback.textContent = `Incorrect! ${droppedBase} cannot pair with ${correctBase}.`;
+        stage1Feedback.style.color = '#dc3545';
+    }
+}
 
 const capDropzone = document.getElementById('cap-dropzone');
 const tailDropzone = document.getElementById('tail-dropzone');
