@@ -1,125 +1,52 @@
+<!-- index_new.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protein Synthesis Game</title>
+    <title>Base Pair Matching Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <button id="themeToggle" class="toggle-button">Toggle Dark Mode</button>
     <div class="game-container">
-        <h1>Protein Synthesis Game</h1>
-
-        <div class="content-wrapper">
-            <div class="game-section">
-                <div id="explanation" class="explanation">
-                    <!-- Explanations will be dynamically inserted here -->
+        <h1>Base Pair Matching Game</h1>
+        <div class="game-section">
+            <div id="explanation" class="explanation"></div>
+            <div id="score-counter">Score: 0</div>
+            <div id="dna-template" class="sequence"></div>
+            <div id="mrna-sequence" class="sequence"></div>
+            <div class="bases">
+                <div class="base" draggable="true" data-base="U">
+                    <img src="U.png" alt="U" />
                 </div>
-
-                <!-- Stage 1: DNA Transcription -->
-                <div id="stage1" class="stage">
-                    <h2>Stage 1: DNA Transcription</h2>
-                    <p>Match the correct mRNA base pairs with the DNA template strand.</p>
-                    <div id="dna-template" class="sequence"></div>
-                    <div id="mrna-sequence" class="sequence">
-                        <div id="dropzone" class="dropzone"></div>
-                    </div>
-                    <div class="bases">
-                        <div class="base" draggable="true" data-base="A">A</div>
-                        <div class="base" draggable="true" data-base="U">U</div>
-                        <div class="base" draggable="true" data-base="C">C</div>
-                        <div class="base" draggable="true" data-base="G">G</div>
-                    </div>
-                    <div id="stage1-feedback" class="feedback"></div>
-                    <button id="nextStage1" class="next-button" style="display:none;">Next Stage</button>
+                <div class="base" draggable="true" data-base="A">
+                    <img src="A.png" alt="A" />
                 </div>
-
-                <!-- Stage 2: mRNA Processing -->
-                <div id="stage2" class="stage" style="display:none;">
-                    <h2>Stage 2: mRNA Processing</h2>
-                    <p>Drag the 5’ cap and poly-A tail to the correct places on the mRNA sequence and remove the introns.</p>
-                    <div class="sequence" id="mrna-processing">
-                        <div id="cap-dropzone" class="dropzone">Drop 5’ Cap here</div>
-                        <div id="mrna-sequence-2" class="mrna-sequence"></div>
-                        <div id="tail-dropzone" class="dropzone">Drop Poly-A Tail here</div>
-                    </div>
-                    <div class="process-items">
-                        <div id="cap" class="process-item" draggable="true" data-type="cap">5’ Cap</div>
-                        <div id="tail" class="process-item" draggable="true" data-type="tail" style="display:none;">Poly-A Tail</div>
-                    </div>
-                    <div id="stage2-feedback" class="feedback"></div>
-                    <button id="removeIntrons" class="process-button" style="display:none;">Remove Introns</button>
-                    <button id="completeStage2" class="next-button" style="display:none;">Next Stage</button>
+                <div class="base" draggable="true" data-base="G">
+                    <img src="G.png" alt="G" />
                 </div>
-
-                <!-- Stage 3: Translation -->
-                <div id="stage3" class="stage" style="display:none;">
-                    <h2>Stage 3: Translation</h2>
-                    <p>Match the tRNA anticodons with the mRNA codons and form the correct polypeptide chain.</p>
-                    <div id="translation-area">
-                        <div id="mrna-codon-sequence" class="sequence"></div>
-                        <div id="polypeptide-sequence" class="sequence">
-                            <!-- Polypeptide chain will form here -->
-                        </div>
-                    </div>
-                    <div class="bases">
-                        <div class="base" draggable="true" data-anticodon="UAC" data-aa="Methionine">tRNA: UAC (Met)</div>
-                        <div class="base" draggable="true" data-anticodon="CGU" data-aa="Arginine">tRNA: CGU (Arg)</div>
-                        <div class="base" draggable="true" data-anticodon="CCC" data-aa="Proline">tRNA: CCC (Pro)</div>
-                        <div class="base" draggable="true" data-anticodon="GGC" data-aa="Glycine">tRNA: GGC (Gly)</div>
-                    </div>
-                    <div id="stage3-feedback" class="feedback"></div>
-                    <button id="completeStage3" class="next-button" style="display:none;">Complete</button>
+                <div class="base" draggable="true" data-base="C">
+                    <img src="C.png" alt="C" />
                 </div>
             </div>
-
-            <div class="explanation-section">
-                <h2>Learn the Science Behind</h2>
-                <div class="accordion">
-                    <div class="accordion-item">
-                        <button class="accordion-header">DNA, RNA, and Nucleotide Bases</button>
-                        <div class="accordion-content">
-                            <p><strong>DNA and RNA</strong> carry genetic information. DNA contains the instructions for making proteins. RNA transfers these instructions to the ribosome for protein synthesis.</p>
-                            <p><strong>Nucleotide Bases:</strong> DNA bases: Adenine (A), Thymine (T), Cytosine (C), Guanine (G). RNA replaces Thymine with Uracil (U). Specific pairing rules: A with T (U in RNA), and C with G due to hydrogen bonding.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">What Are Introns and Exons?</button>
-                        <div class="accordion-content">
-                            <p>Introns are non-coding segments in mRNA, removed during processing. Exons are the coding segments translated into protein.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">5’ Cap and Poly-A Tail</button>
-                        <div class="accordion-content">
-                            <p>The 5' cap and poly-A tail protect the mRNA and help in translation initiation.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">Translation Process</button>
-                        <div class="accordion-content">
-                            <p><strong>Codons and Anticodons:</strong> A codon is a sequence of three nucleotides in mRNA that corresponds to a specific amino acid. A tRNA anticodon binds to a codon to deliver the correct amino acid.</p>
-                            <p><strong>Ribosomes:</strong> Ribosomes are cellular machinery that reads mRNA codons and helps form a chain of amino acids (polypeptide) to build proteins.</p>
-                            <p><strong>Amino Acids:</strong> Amino acids are the building blocks of proteins. Each amino acid is coded by a specific codon, and the chain folds into a functional protein.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="stage1-feedback" class="feedback"></div>
+            <button id="resetGame" class="reset-button">Reset Game</button>
         </div>
-    </div>
-<!-- Base Pair Key -->
-            <div class="key-section">
-                <h2>Base Pair Key</h2>
-                <ul>
-                    <li><img src="A.png" alt="A" /> - Adenine (A)</li>
-                    <li><img src="T.png" alt="T" /> - Thymine (T)</li>
-                    <li><img src="C.png" alt="C" /> - Cytosine (C)</li>
-                    <li><img src="G.png" alt="G" /> - Guanine (G)</li>
-                    <li><img src="U.png" alt="U" /> - Uracil (U)</li>
-                </ul>
-            </div>
+        <div class="key-section">
+            <h2>Base Pair Key</h2>
+            <ul>
+                <li><img src="A.png" alt="A" /> - Adenine (A)</li>
+                <li><img src="T.png" alt="T" /> - Thymine (T)</li>
+                <li><img src="C.png" alt="C" /> - Cytosine (C)</li>
+                <li><img src="G.png" alt="G" /> - Guanine (G)</li>
+                <li><img src="U.png" alt="U" /> - Uracil (U)</li>
+            </ul>
         </div>
+
+
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>
+
+
